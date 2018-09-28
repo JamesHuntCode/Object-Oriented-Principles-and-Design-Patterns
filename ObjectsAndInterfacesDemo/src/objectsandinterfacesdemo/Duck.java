@@ -6,4 +6,14 @@ package objectsandinterfacesdemo;
  */
 public abstract class Duck {
     
+    FlyBehaviour flyBehaviour;
+    
+    public Duck() {
+        
+    }
+    
+    public void performFly() {
+        flyBehaviour.fly();
+    }
+    
 }

@@ -6,4 +6,6 @@ package objectsandinterfacesdemo;
  */
 public interface FlyBehaviour {
     
+    public void fly();
+    
 }
