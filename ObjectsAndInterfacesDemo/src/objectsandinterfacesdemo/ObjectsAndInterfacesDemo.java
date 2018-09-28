@@ -11,6 +11,11 @@ public class ObjectsAndInterfacesDemo {
      */
     public static void main(String[] args) {
         
+        Duck model = new ModelDuck();
+        model.performFly();
+        model.setFlyBehaviour(new FlyWithWings());
+        model.performFly();
+        
     }
     
 }
