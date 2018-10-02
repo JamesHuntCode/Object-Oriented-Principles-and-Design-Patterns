@@ -21,12 +21,20 @@ public class BankAccount {
         this.holder = accountHolder;
     }
     
-    public boolean despositFunds(int amount) {
-        return true;
+    public void despositFunds(int amount) {
+        this.balance += amount;
     }
     
     public boolean takeFunds(int amount) {
-        return true;
+        if (this.balance - amount < 0)
+        {
+            return false;
+        }
+        else 
+        {
+            this.balance -= amount;
+            return true;
+        }
     }
     
     public int getBalance() {
