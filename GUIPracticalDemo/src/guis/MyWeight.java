@@ -17,7 +17,26 @@ public class MyWeight extends javax.swing.JFrame {
     public MyWeight() {
         initComponents();
     }
-
+    
+    /** 
+     * Handle the conversion from KG to LBS.
+     */
+    private void doConversion()
+    {
+        int inputValue = Integer.parseInt(txtInputKilos.getText());
+        double value = inputValue * 2.2;
+        
+        txtInputLbs.setText("" + value);
+    }
+   
+    /**
+     * Handle the closing of the application.
+     */
+    private void closeApplication()
+    {
+        System.exit(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialise the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,9 +76,19 @@ public class MyWeight extends javax.swing.JFrame {
         btnConvert.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnConvert.setText("Convert KG >> LBS");
         btnConvert.setActionCommand("");
+        btnConvert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConvertActionPerformed(evt);
+            }
+        });
 
         btnCloseApplication.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnCloseApplication.setText("Close Application");
+        btnCloseApplication.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseApplicationActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +137,14 @@ public class MyWeight extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertActionPerformed
+        doConversion();
+    }//GEN-LAST:event_btnConvertActionPerformed
+
+    private void btnCloseApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseApplicationActionPerformed
+        closeApplication();
+    }//GEN-LAST:event_btnCloseApplicationActionPerformed
 
     /**
      * @param args the command line arguments
