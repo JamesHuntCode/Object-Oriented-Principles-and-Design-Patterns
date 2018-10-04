@@ -7,6 +7,7 @@
 package guis;
 
 import bankentities.BankAccount;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,21 +36,31 @@ public class BankingDemoApp extends javax.swing.JFrame {
      * Method to deposit money into the user's current account.
      */
     private void doDeposit() {
-        currentAccount.depositFunds(Integer.parseInt(txtAmount.getText()));
-        txtAmount.setText("");
-        txtBalance.setText("" + currentAccount.getBalance());
+        try {
+            currentAccount.depositFunds(Integer.parseInt(txtAmount.getText()));
+            txtAmount.setText("");
+            txtBalance.setText("" + currentAccount.getBalance());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter numbers only.", "Error in amount", JOptionPane.ERROR_MESSAGE); 
+        }
     }
     
     /**
      * Method to withdraw money from the user's current account.
      */
     private void doWithdraw() {
-        boolean success = currentAccount.takeFunds(Integer.parseInt(txtAmount.getText()));
-        
-        if (success)
-        {
-            txtAmount.setText("");
-            txtBalance.setText("" + currentAccount.getBalance());
+        try {
+            boolean success = currentAccount.takeFunds(Integer.parseInt(txtAmount.getText()));
+
+            if (success)
+            {
+                txtAmount.setText("");
+                txtBalance.setText("" + currentAccount.getBalance());
+            }
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter numbers only.", "Error in amount", JOptionPane.ERROR_MESSAGE); 
         }
     }
 
