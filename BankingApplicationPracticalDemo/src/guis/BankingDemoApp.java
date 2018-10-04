@@ -16,7 +16,8 @@ public class BankingDemoApp extends javax.swing.JFrame {
     
     private final BankAccount currentAccount;
     
-
+    
+    
     /**
      * Creates new form BankingDemoApp
      */
@@ -25,6 +26,31 @@ public class BankingDemoApp extends javax.swing.JFrame {
         
         currentAccount = new BankAccount("James Hunt");
         
+        txtHolder.setText(currentAccount.getAccountHolder());
+        txtBalance.setText("" + currentAccount.getBalance());
+        txtOverdraft.setText("" + currentAccount.getOverdraft());
+    }
+    
+    /**
+     * Method to deposit money into the user's current account.
+     */
+    private void doDeposit() {
+        currentAccount.depositFunds(Integer.parseInt(txtAmount.getText()));
+        txtAmount.setText("");
+        txtBalance.setText("" + currentAccount.getBalance());
+    }
+    
+    /**
+     * Method to withdraw money from the user's current account.
+     */
+    private void doWithdraw() {
+        boolean success = currentAccount.takeFunds(Integer.parseInt(txtAmount.getText()));
+        
+        if (success)
+        {
+            txtAmount.setText("");
+            txtBalance.setText("" + currentAccount.getBalance());
+        }
     }
 
     /**
@@ -47,10 +73,11 @@ public class BankingDemoApp extends javax.swing.JFrame {
         btnDesposit = new javax.swing.JButton();
         btnWithdraw = new javax.swing.JButton();
         lblHeader = new javax.swing.JLabel();
-        txtHolder1 = new javax.swing.JTextField();
+        txtHolder = new javax.swing.JTextField();
         btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         pnlSummary.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -60,8 +87,10 @@ public class BankingDemoApp extends javax.swing.JFrame {
         lblOverdraft.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblOverdraft.setText("Overdraft: ");
 
+        txtBalance.setEditable(false);
         txtBalance.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        txtOverdraft.setEditable(false);
         txtOverdraft.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout pnlSummaryLayout = new javax.swing.GroupLayout(pnlSummary);
@@ -102,9 +131,19 @@ public class BankingDemoApp extends javax.swing.JFrame {
 
         btnDesposit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDesposit.setText("Desposit");
+        btnDesposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDespositActionPerformed(evt);
+            }
+        });
 
         btnWithdraw.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnWithdraw.setText("Withdraw");
+        btnWithdraw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWithdrawActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlInteractLayout = new javax.swing.GroupLayout(pnlInteract);
         pnlInteract.setLayout(pnlInteractLayout);
@@ -141,10 +180,16 @@ public class BankingDemoApp extends javax.swing.JFrame {
         lblHeader.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblHeader.setText("Bank Account For:");
 
-        txtHolder1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtHolder.setEditable(false);
+        txtHolder.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         btnExit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnExit.setText("Exit Application");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,35 +203,40 @@ public class BankingDemoApp extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblHeader)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtHolder))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(txtHolder1)
-                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(lblHeader)
-                .addGap(88, 88, 88)
+                .addGap(18, 18, 18)
+                .addComponent(txtHolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
                 .addComponent(pnlSummary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlInteract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit)
                 .addContainerGap(15, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(77, 77, 77)
-                    .addComponent(txtHolder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(331, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDespositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespositActionPerformed
+        doDeposit();
+    }//GEN-LAST:event_btnDespositActionPerformed
+
+    private void btnWithdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWithdrawActionPerformed
+        doWithdraw();
+    }//GEN-LAST:event_btnWithdrawActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,7 +285,7 @@ public class BankingDemoApp extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSummary;
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtBalance;
-    private javax.swing.JTextField txtHolder1;
+    private javax.swing.JTextField txtHolder;
     private javax.swing.JTextField txtOverdraft;
     // End of variables declaration//GEN-END:variables
 }

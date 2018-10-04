@@ -21,7 +21,7 @@ public class BankAccount {
         this.holder = accountHolder;
     }
     
-    public void despositFunds(int amount) {
+    public void depositFunds(int amount) {
         this.balance += amount;
     }
     
