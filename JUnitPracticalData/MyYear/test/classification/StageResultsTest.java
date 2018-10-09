@@ -104,15 +104,6 @@ public class StageResultsTest {
     public void testAddModuleMark() {
         //fail("Test not yet implemented"); 
         
-//        empty.addModuleMark(20, 70.00);
-//        System.out.println(empty.getTotalCredits()); // expected: 20
-//
-//        empty.addModuleMark(10, 70.00); 
-//        System.out.println(empty.getTotalCredits()); // expected: 30
-//
-//        empty.addModuleMark(40, 70.00);
-//        System.out.println(empty.getTotalCredits()); // expected: 70
-        
         empty.addModuleMark(20, 70.0);
         assertEquals("credits", 20, empty.getTotalCredits());
         assertEquals("marks", 140, empty.getTotalMarks(), 0.0);
@@ -140,7 +131,33 @@ public class StageResultsTest {
         // Test with 120 credits all at 100%
         full.resetValues();
         full.addModuleMark(120, 100.0);
-        assertEquals("full @ 100%", 100.0, full.calculateAverageSoFar(), 0.0); 
+        assertEquals("full @ 100%", 100.0, full.calculateAverageSoFar(), 0.0);
+        
+        // Test with 120 credits all at 42.92%
+        full.resetValues();
+        full.addModuleMark(120, 43.92);
+        assertEquals("full @ 43.92%", 43.92, full.calculateAverageSoFar(), 0.0);
+        
+        // Restore original values:
+        full.resetValues();
+        full.addModuleMark(120, 50.0);
+        
+        // Test half full:
+        assertEquals("half full", 50.0, halfFull.calculateAverageSoFar(), 0.0);
+        
+        halfFull.resetValues();
+        
+        halfFull.addModuleMark(60, 100);
+        assertEquals("half full", 100, halfFull.calculateAverageSoFar(), 0.0);
+        
+        halfFull.resetValues();
+        
+        halfFull.addModuleMark(60, 64.77);
+        assertEquals("half full", 64.77, halfFull.calculateAverageSoFar(), 0.0);
+        
+        // Reset original values:
+        halfFull.resetValues();
+        halfFull.addModuleMark(60, 50.0);
     }
 
     @Test
