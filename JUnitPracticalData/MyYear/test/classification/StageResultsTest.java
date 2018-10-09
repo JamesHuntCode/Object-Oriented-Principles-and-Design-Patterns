@@ -64,10 +64,27 @@ public class StageResultsTest {
     public void testSetStage2Average() {
 
     }
-    
+
     @Test
     public void testFullOperation() {
-        
+        int[] credits = {10, 10, 10, 20, 20, 40, 10};
+        double[] marks = {60.6, 44.45, 80.0, 56.99, 62.3, 68.4, 59.11};
+        double stage2 = 61.2;
+
+        StageResults finalTest = new StageResults();
+
+        // Add in the module marks and set the stage 2 average
+        for (int count = 0; count < credits.length; count++) {
+            finalTest.addModuleMark(credits[count], marks[count]);
+        }
+        finalTest.setStage2Average(stage2);
+
+        // Test the results
+        assertEquals("stage 3 average", 63.03,
+                finalTest.calculateAverageSoFar(), 0.0);
+        assertEquals("predicted class", "Upper 2nd",
+                finalTest.predictClass());
+
     }
 
     @Test
@@ -186,7 +203,7 @@ public class StageResultsTest {
             "FAIL", "3rd", "Lower 2nd", "Upper 2nd", "1st"};
 
         String[] expResult2 = {"No marks!", "Lower 2nd", "Lower 2nd",
-            "1st", "FAIL", "3rd", "3rd", "Lower 2nd", "Lower 2nd", "Upper 2nd", 
+            "1st", "FAIL", "3rd", "3rd", "Lower 2nd", "Lower 2nd", "Upper 2nd",
             "Upper 2nd", "1st", "1st", "FAIL", "3rd", "Lower 2nd", "Upper 2nd", "1st"};
 
         // Run tests with no stage 2 average
@@ -195,7 +212,7 @@ public class StageResultsTest {
             full.addModuleMark(120, marks[count]);
             assertEquals("120 credits, mark = " + marks[count], expResult1[count], full.predictClass());
         }
-        
+
         assertEquals("not enough credits", "Insufficient credits", empty.predictClass());
         assertEquals("not enough credits", "Insufficient credits", halfFull.predictClass());
     }
