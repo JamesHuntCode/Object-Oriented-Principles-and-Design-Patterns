@@ -20,6 +20,7 @@ public class BankAccountTest {
     
     public BankAccountTest() {
         testAccount = new BankAccount("James Hunt");
+        // ** OBJECT INFORMATION **
         // Holder = James Hunt
         // Balance = 100
         // Overdraft = 500
