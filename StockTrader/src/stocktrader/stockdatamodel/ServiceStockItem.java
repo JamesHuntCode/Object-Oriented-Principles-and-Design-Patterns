@@ -21,4 +21,10 @@ public class ServiceStockItem extends StockItem {
         this.name = name;
         this.quantityInStock = qty;
     }
+    
+    @Override
+    public boolean isInStock()
+    {
+        return true;
+    }
 }
