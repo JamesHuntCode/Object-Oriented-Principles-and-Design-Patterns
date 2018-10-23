@@ -9,7 +9,7 @@ package models;
  *
  * @author James
  */
-public abstract class Lecturer extends UniPeople implements ITeach {
+public class Lecturer extends UniPeople implements ITeach {
     
     public Lecturer(int id, String name)
     {

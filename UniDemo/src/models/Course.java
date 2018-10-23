@@ -15,6 +15,12 @@ public class Course {
     public Lecturer teacher;
     public String coursework;
     public String room;
+    
+    public Course(String c, String r)
+    {
+        this.code = c;
+        this.room = r;
+    }
 
     public String getCode() {
         return code;

@@ -9,7 +9,7 @@ package models;
  *
  * @author James
  */
-public abstract class Student extends UniPeople {
+public class Student extends UniPeople {
     
     public Student(int id, String name)
     {

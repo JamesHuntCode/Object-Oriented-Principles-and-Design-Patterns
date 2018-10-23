@@ -6,13 +6,20 @@ package models;
  */
 public class Admin {
     
-    public static void assignCourse(UniPeople person, Course course)
+    public void assignCourse(UniPeople person, Course course)
     {
         person.course = course;
     }
     
-    public static void getDetails(UniPeople person)
+    public void getDetails(UniPeople person)
     {
-        System.out.print(person.id + person.name + person.course.code);
-    }
+        if (person.course != null)
+        {
+            System.out.print(person.id + person.name + person.course.code);
+        }
+        else 
+        {
+            System.out.print("person not logged correctly.");
+        }
+    }  
 }
