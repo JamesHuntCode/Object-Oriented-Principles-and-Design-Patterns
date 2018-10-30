@@ -4,17 +4,20 @@
  * and open the template in the editor.
  */
 package stocktrader.stockdatamodel;
+import java.util.ArrayList;
+import stocktrader.stockdatamodel.utilities.*;
 
 /**
  *
  * @author James
  */
-public abstract class StockItem {
+public abstract class StockItem implements ISubject {
     
     protected String name = "UNKNOWN";
     protected Integer quantityInStock = 0;
     protected Double sellingPrice = 1000000.00;
     protected Double costPrice = 1000000.00;
+    private ArrayList<IObserver> observers = null;
     
     public StockItem() {
         
@@ -37,6 +40,7 @@ public abstract class StockItem {
         if (name != null && !name.isEmpty())
         {
             this.name = name;
+            notifyObservers();
         }
     }
 
@@ -48,6 +52,7 @@ public abstract class StockItem {
         if (quantityInStock != null && quantityInStock >= 0)
         {
             this.quantityInStock = quantityInStock;
+            notifyObservers();
         }
     }
 
@@ -59,6 +64,7 @@ public abstract class StockItem {
         if (sellingPrice != null && sellingPrice >= this.costPrice && sellingPrice >= 0)
         {
             this.sellingPrice = sellingPrice;
+            notifyObservers();
         }
     }
 
@@ -70,6 +76,7 @@ public abstract class StockItem {
         if (costPrice != null && costPrice >= 0)
         {
             this.costPrice = costPrice;
+            notifyObservers();
         }
     }
     
@@ -79,4 +86,44 @@ public abstract class StockItem {
     }
     
     public abstract StockType getItemType();
+    
+    @Override
+    public boolean registerObserver(IObserver o) {
+        
+        boolean added = false;
+        
+        if (o != null) {
+            
+            if (this.observers == null) {
+                this.observers = new ArrayList<>();
+            }
+            
+            added = this.observers.add(o);
+        }
+        
+        return added;
+    }
+    
+    @Override
+    public boolean removeObserver(IObserver o) {
+        
+        boolean removed = false;
+    
+        if (this.observers != null && this.observers.size() > 0) {
+            removed = this.observers.remove(o);
+        } else {
+            return false;
+        }
+         
+        return removed;
+    }
+    
+    @Override
+    public void notifyObservers() {
+        if (this.observers != null && this.observers.size() > 0) {
+            for (IObserver observer : this.observers) {
+                observer.update();
+            }
+        }
+    }
 }

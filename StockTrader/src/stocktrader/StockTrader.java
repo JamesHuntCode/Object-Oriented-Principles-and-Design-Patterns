@@ -35,6 +35,13 @@ public class StockTrader {
         else {
             System.out.print("This item is NOT a physical stock item.");
         }
+        
+        if (virtualItem.getItemType() == StockType.SERVICEITEM) {
+            System.out.print("This item is a service stock item.");
+        }
+        else {
+            System.out.print("This item is NOT a service stock item.");
+        }
     }
     
 }
