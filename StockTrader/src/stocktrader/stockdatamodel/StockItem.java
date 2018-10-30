@@ -15,8 +15,8 @@ public abstract class StockItem implements ISubject {
     
     protected String name = "UNKNOWN";
     protected Integer quantityInStock = 0;
-    protected Double sellingPrice = 1000000.00;
-    protected Double costPrice = 1000000.00;
+    protected Double sellingPrice = 10.00;
+    protected Double costPrice = 10.00;
     private ArrayList<IObserver> observers = null;
     
     public StockItem() {

@@ -42,6 +42,22 @@ public class StockTrader {
         else {
             System.out.print("This item is NOT a service stock item.");
         }
+        
+        System.out.println("\n\n\n");
+        
+        AnObserver obs = new AnObserver();
+        
+        physicalItem.registerObserver(obs);
+        virtualItem.registerObserver(obs);
+        
+        System.out.println("Changing the quantity of the physical stock item...\n");
+        physicalItem.setQuantityInStock(10);
+        System.out.println("\n\n");
+        
+        System.out.println("Changing the price of the service stock item...\n");
+        virtualItem.setSellingPrice(20.00);
+        System.out.println("\n\n");
+        
     }
     
 }
