@@ -9,15 +9,8 @@ package pubsimulation;
  *
  * @author james
  */
-public class PubSimulation {
+public class BottledDrink extends BottleTapDrink {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        
-        
-    }
+    
     
 }

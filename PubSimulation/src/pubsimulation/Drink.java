@@ -9,15 +9,10 @@ package pubsimulation;
  *
  * @author james
  */
-public class PubSimulation {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        
+public abstract class Drink implements IServe {
+    
+    @Override
+    public void ServeDrink() {
         
     }
-    
 }
