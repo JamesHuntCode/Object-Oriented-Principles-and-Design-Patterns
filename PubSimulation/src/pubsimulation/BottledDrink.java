@@ -11,6 +11,14 @@ package pubsimulation;
  */
 public class BottledDrink extends BottleTapDrink {
 
+    @Override
+    public void ServeDrink() {
+        OpenBottle();
+        PourDrinkIntoGlass();
+    }
     
+    public void OpenBottle() {
+        System.out.println("Opening bottle...");
+    }
     
 }

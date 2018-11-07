@@ -9,15 +9,7 @@ package pubsimulation;
  *
  * @author james
  */
-public abstract class BottleTapDrink extends Drink {
-    
-    public void OpenBottle() {
-        System.out.println("Opening bottle...");
-    }
-    
-    public void PutGlassUnderTap() {
-        System.out.println("Putting glass under tap...");
-    }
+public abstract class BottleTapDrink implements IServe {
     
     public void PourDrinkIntoGlass() {
         System.out.println("Pouring drink into glass...");

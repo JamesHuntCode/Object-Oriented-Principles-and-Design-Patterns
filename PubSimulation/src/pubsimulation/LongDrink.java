@@ -11,6 +11,12 @@ package pubsimulation;
  */
 public class LongDrink extends AlcoholicDrink {
 
-    
+    @Override
+    public void ServeDrink() {
+        AddIce();
+        AddSpirit(1);
+        AddMixer();
+        AddGarnish("simple");
+    }
     
 }

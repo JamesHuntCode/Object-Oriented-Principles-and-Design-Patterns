@@ -11,6 +11,20 @@ package pubsimulation;
  */
 public class Tea extends HotDrink {
 
+    @Override
+    public void ServeDrink() {
+        BoilWater();
+        StirTea();
+        PourDrinkIntoCup();
+        AddLemon();
+    }
     
+    public void StirTea() {
+        System.out.println("Stiring tea...");
+    }
+    
+    public void AddLemon() {
+        System.out.println("Adding lemon...");
+    }
     
 }

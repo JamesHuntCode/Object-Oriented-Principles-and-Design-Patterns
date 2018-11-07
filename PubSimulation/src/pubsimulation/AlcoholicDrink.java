@@ -9,7 +9,7 @@ package pubsimulation;
  *
  * @author james
  */
-public abstract class AlcoholicDrink extends Drink {
+public abstract class AlcoholicDrink implements IServe {
     
     public void AddIce() {
         System.out.println("Adding ice...");

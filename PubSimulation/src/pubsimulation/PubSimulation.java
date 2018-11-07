@@ -15,8 +15,12 @@ public class PubSimulation {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         
+        // Define a new landlord.
+        Landlord barStaff = new Landlord();
+        
+        // Serve a coffee.
+        barStaff.GetDrink("coffee");
         
     }
     
