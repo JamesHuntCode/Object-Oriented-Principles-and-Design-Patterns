@@ -5,6 +5,8 @@
  */
 package pubsimulation;
 
+import java.util.*;
+
 /**
  *
  * @author james
@@ -19,9 +21,14 @@ public class PubSimulation {
         // Define a new landlord.
         Landlord barStaff = new Landlord();
         
-        // Serve a coffee.
-        barStaff.GetDrink("coffee");
+        // Serve a drink (of the user's choice).
+        System.out.println("What can I get you?\n");
         
+        Scanner input = new Scanner(System.in); 
+        String answer = input.nextLine();
+        
+        barStaff.GetDrink(answer);
+        System.out.println("");
     }
     
 }

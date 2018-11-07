@@ -27,6 +27,9 @@ public class Landlord implements IServe {
     
     public void GetDrink(String order) {
         
+        
+        
+        
         switch (order) {
             case "coffee":
                 
