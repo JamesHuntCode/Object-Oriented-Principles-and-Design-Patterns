@@ -11,51 +11,29 @@ package pubsimulation;
  */
 public class Landlord implements IServe {
     
-    public IServe drinkType;
+    private DrinkFactory factory = new DrinkFactory();
+    private IServe currentBeverage = null;
     
     @Override
     public void ServeDrink() {
         
-        if(drinkType != null) {
+        if (currentBeverage != null) {
             
-            System.out.println("Fetching you a drink...\n");
-            drinkType.ServeDrink();
+            currentBeverage.ServeDrink();
+            
+        } else {
+            
+            System.out.println("We have no stock!");
             
         }
         
     }
     
-    public void GetDrink(String order) {
+    public void TakeOrder(String order) {
         
-        
-        
-        
-        switch (order) {
-            case "coffee":
-                
-                SetDrinkType(new Coffee());
-                
-                break;
-            case "tea":
-                
-                SetDrinkType(new Tea());
-                
-                break;
-            case "cocktail":
-                
-                SetDrinkType(new Cocktail());
-                
-                break;
-        }
-        
-        // Come back later and add in the other types of drinks...
-        
-    }
-    
-    private void SetDrinkType(IServe type) {
-        
-        drinkType = type;
+        currentBeverage = factory.createDrink(order);
         ServeDrink();
         
     }
+    
 }
