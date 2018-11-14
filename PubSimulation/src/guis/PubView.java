@@ -5,17 +5,41 @@
  */
 package guis;
 
+import java.util.*;
+import javax.swing.*;
+import pubsimulation.Landlord;
+
+
+
 /**
  *
  * @author james
  */
 public class PubView extends javax.swing.JFrame {
+    
+    private DefaultListModel output = new DefaultListModel();
+    private String[] drinks = new String[6];
+    private Landlord barStaff = new Landlord();
+    private String selectedDrink = null;
 
     /**
      * Creates new form PubView
      */
     public PubView() {
+        
         initComponents();
+        
+        drinks[0] = "Tap Drink";
+        drinks[1] = "Bottle Drink";
+        drinks[2] = "Tea";
+        drinks[3] = "Coffee";
+        drinks[4] = "Long Drink";
+        drinks[5] = "Cocktail";
+        
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(drinks));
+        lstCodeOutput.setModel(output);
+        selectedDrink = drinks[0];
+        
     }
 
     /**
@@ -46,9 +70,18 @@ public class PubView extends javax.swing.JFrame {
         });
 
         jComboBox1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tap Drink", "Bottle Drink", "Tea", "Coffee", "Long Drink", "Cocktail" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         lstCodeOutput.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        lstCodeOutput.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "model" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         lstCodeOutput.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(lstCodeOutput);
 
@@ -100,9 +133,15 @@ public class PubView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // On-Click event for button to order a drink:
     private void btnOrderDrinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderDrinkActionPerformed
-        
+        barStaff.TakeOrder(selectedDrink.toLowerCase());
     }//GEN-LAST:event_btnOrderDrinkActionPerformed
+    
+    // On selected-item-changed for combox box:
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        this.selectedDrink = jComboBox1.getSelectedItem().toString();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
