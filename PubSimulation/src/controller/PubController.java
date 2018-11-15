@@ -14,23 +14,34 @@ import model.*;
 public class PubController implements IObserver {
 
     // Hold instance of the model class:
-    Model model = new Model();
+    Model pubModel = new Model();
+    String[] currentlyAvailableDrinks;
+    
+    public PubController() {
+        
+        pubModel.register(this);
+        
+    }
     
     @Override
     public void update() {
         
+        currentlyAvailableDrinks = pubModel.getAvailableDrinks();
+
     }
     
     // Method to return the list of avaible drinks at the pub.
     public String[] getListOfAvailableDrinks() {
         
-        return model.getAvailableDrinks();
+        currentlyAvailableDrinks = pubModel.getAvailableDrinks();
+        
+        return currentlyAvailableDrinks;
         
     }
     
     // Method to pass the user's order through to the model.
     public String[] takeDrinkOrder(String userInput)
     {
-        return model.processDrinkRequest(userInput);
+        return pubModel.processDrinkRequest(userInput);
     }
 }

@@ -6,6 +6,7 @@
 package model;
 
 import interfaces.*;
+import java.util.*;
 import model.*;
 
 /**
@@ -16,19 +17,30 @@ public class Model implements IObservable {
     
     // Hold an instance of the landlord class:
     Landlord staffMember = new Landlord();
+    ArrayList<IObserver> observers = new ArrayList<>();
 
     @Override
     public void register(IObserver newObserver) {
+        
+        observers.add(newObserver);
         
     }
 
     @Override
     public void unregister(IObserver removeMe) {
         
+        observers.remove(removeMe);
+        
     }
 
     @Override
     public void notifyObserver() {
+        
+        for (IObserver observer : observers) {
+            
+            observer.update();
+            
+        }
         
     }
     
