@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pubsimulation;
+package model;
+
+import interfaces.IServe;
 
 /**
  *
@@ -11,13 +13,13 @@ package pubsimulation;
  */
 public abstract class HotDrink implements IServe {
     
-    public void BoilWater() {
-        System.out.println("Boiling water...");
+    public String BoilWater() {
+        return "Boiling water...";
     }
     
 
-    public void PourDrinkIntoCup() {
-        System.out.println("Pouring drink into cup...");
+    public String PourDrinkIntoCup() {
+        return "Pouring drink into cup...";
     }
     
 }

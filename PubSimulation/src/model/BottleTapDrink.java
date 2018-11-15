@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pubsimulation;
+package model;
+
+import interfaces.IServe;
 
 /**
  *
  * @author james
  */
-public class Cocktail extends AlcoholicDrink {
-
-    @Override
-    public void ServeDrink() {
-        AddIce();
-        AddSpirit(2);
-        AddMixer();
-        AddGarnish("fancy");
-    }
+public abstract class BottleTapDrink implements IServe {
     
+    public String PourDrinkIntoGlass() {
+        return "Pouring drink into glass...";
+    }
 }

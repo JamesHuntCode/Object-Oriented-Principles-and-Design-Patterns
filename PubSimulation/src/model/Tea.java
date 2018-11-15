@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pubsimulation;
+package model;
 
 /**
  *
@@ -12,19 +12,18 @@ package pubsimulation;
 public class Tea extends HotDrink {
 
     @Override
-    public void ServeDrink() {
-        BoilWater();
-        StirTea();
-        PourDrinkIntoCup();
-        AddLemon();
+    public String[] ServeDrink() {
+        
+        return new String[] {BoilWater(), StirTea(), PourDrinkIntoCup(), AddLemon()};
+        
     }
     
-    public void StirTea() {
-        System.out.println("Stiring tea...");
+    public String StirTea() {
+        return "Stiring tea...";
     }
     
-    public void AddLemon() {
-        System.out.println("Adding lemon...");
+    public String AddLemon() {
+        return "Adding lemon...";
     }
     
 }

@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pubsimulation;
+package interfaces;
 
 /**
  *
  * @author james
  */
-public abstract class BottleTapDrink implements IServe {
+public interface IServe {
     
-    public void PourDrinkIntoGlass() {
-        System.out.println("Pouring drink into glass...");
-    }
+    public String[] ServeDrink();
+    
 }

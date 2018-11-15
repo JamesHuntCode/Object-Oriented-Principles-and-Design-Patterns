@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pubsimulation;
+package model;
+
+import pubsimulation.*;
+import interfaces.IServe;
 
 /**
  *
@@ -11,28 +14,29 @@ package pubsimulation;
  */
 public class Landlord implements IServe {
     
-    private DrinkFactory factory = new DrinkFactory();
+    private final DrinkFactory factory = new DrinkFactory();
     private IServe currentBeverage = null;
     
     @Override
-    public void ServeDrink() {
+    public String[] ServeDrink() {
         
         if (currentBeverage != null) {
             
-            currentBeverage.ServeDrink();
+            return currentBeverage.ServeDrink();
             
         } else {
             
-            System.out.println("We have no stock!");
+            return new String[] {"We have no stock!"};
             
         }
         
     }
     
-    public void TakeOrder(String order) {
+    public String[] createOrder(String order) {
         
         currentBeverage = factory.createDrink(order);
-        ServeDrink();
+        
+        return ServeDrink();
         
     }
     
