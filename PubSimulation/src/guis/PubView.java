@@ -8,7 +8,7 @@ package guis;
 /*
 * Add required import statements.
 */
-import java.util.*;
+
 import javax.swing.*;
 import controller.*;
 
@@ -18,30 +18,42 @@ import controller.*;
  */
 public class PubView extends javax.swing.JFrame {
     
-    private PubController controller = new PubController();
-    private DefaultListModel output = new DefaultListModel();
-    private String[] drinks = new String[controller.getListOfAvailableDrinks().length];
-
+    private PubController controller;
+    private DefaultListModel output;
+    
     /**
      * Creates new form PubView
      */
     public PubView() {
         
         initComponents();
+        this.controller = new PubController(this);
+        this.output = new DefaultListModel();
+        this.lstCodeOutput.setModel(output);
         
-        // Configure components:
-        drinks = controller.getListOfAvailableDrinks();
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(drinks));
-        lstCodeOutput.setModel(output);
+    }
+    
+    // Method to append the drink choices for the user to the drop down box.
+    public void setDropDownValues(String[] values) {
+        
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(values));
+        
     }
     
     // Method to post the output of the ProcessDrinkRequest method (inside the model) to the ListView.
-    private void PostCodeProcessToScreen(String[] steps)
+    public void postCodeProcessToScreen(String[] steps)
     {
         for (String step : steps)
         {
             output.addElement(step);
         }
+    }
+    
+    // Method to return the drink currently selected in the drop down.
+    public String getChosenDrink() {
+        
+        return jComboBox1.getSelectedItem().toString().toLowerCase();
+        
     }
 
     /**
@@ -137,13 +149,7 @@ public class PubView extends javax.swing.JFrame {
 
     // On-Click event for button to order a drink:
     private void btnOrderDrinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderDrinkActionPerformed
-        
-        String order = jComboBox1.getSelectedItem().toString().toLowerCase();
-        
-        String[] process = controller.takeDrinkOrder(order);
-        
-        PostCodeProcessToScreen(process);
-        
+        controller.buttonClicked();
     }//GEN-LAST:event_btnOrderDrinkActionPerformed
     
     // On selected-item-changed for combox box:

@@ -6,6 +6,7 @@
 package controller;
 import interfaces.*;
 import model.*;
+import guis.*;
 
 /**
  *
@@ -14,34 +15,37 @@ import model.*;
 public class PubController implements IObserver {
 
     // Hold instance of the model class:
-    Model pubModel = new Model();
-    String[] currentlyAvailableDrinks;
+    PubModel pubModel;
+    PubView pubView;
     
-    public PubController() {
+    public PubController(PubView view) {
         
-        pubModel.register(this);
+        // Configure global variables:
+        this.pubView = view;
+        this.pubModel = new PubModel();
+        this.pubModel.register(this);
+        
+        // Configure the view:
+        pubView.setDropDownValues(pubModel.getDrinks());
         
     }
     
     @Override
     public void update() {
         
-        currentlyAvailableDrinks = pubModel.getAvailableDrinks();
+        updateView(pubModel.getStepsToMakeLastDrink());
 
     }
     
-    // Method to return the list of avaible drinks at the pub.
-    public String[] getListOfAvailableDrinks() {
+    public void buttonClicked() {
         
-        currentlyAvailableDrinks = pubModel.getAvailableDrinks();
-        
-        return currentlyAvailableDrinks;
+        pubModel.processDrinkRequest(pubView.getChosenDrink());
         
     }
     
-    // Method to pass the user's order through to the model.
-    public String[] takeDrinkOrder(String userInput)
-    {
-        return pubModel.processDrinkRequest(userInput);
+    private void updateView(String[] drinkProcess) {
+        
+        pubView.postCodeProcessToScreen(drinkProcess);
+        
     }
 }
